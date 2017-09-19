@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_drawer_width">260dp</dimen>
+    <dimen name="forecast_activity_text_size">14sp</dimen>
+    <dimen name="large_text_size">100sp</dimen>
+    <dimen name="image_view_width">100dp</dimen>
+    <dimen name="image_view_height">100dp</dimen>
+    <dimen name="weather_forecast_margin_top">24dp</dimen>
+    <dimen name="weather_forecast_margin_left">20dp</dimen>
+</resources>
