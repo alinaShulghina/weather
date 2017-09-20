@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:theme="@style/MyMaterialTheme"
-    tools:context="com.example.alin_.weatherforecast.view.MainActivity">
+    tools:context="com.example.alin_.weatherforecast.view.activities.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -18,9 +18,11 @@ import java.util.List;
 
 public class DBModelImpl implements DBModel {
     private CityDBHelper dbHelper;
-    public DBModelImpl(Context context){
+
+    public DBModelImpl(Context context) {
         dbHelper = new CityDBHelper(context);
     }
+
     @Override
     public List<City> getCities() {
         SQLiteDatabase db = dbHelper.getReadableDatabase();

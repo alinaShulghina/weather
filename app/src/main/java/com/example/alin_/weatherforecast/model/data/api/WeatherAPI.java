@@ -17,7 +17,8 @@ public class WeatherAPI {
     public static ApiInterface getApiInterface() {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create());
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
         return builder.build().create(ApiInterface.class);
     }
 

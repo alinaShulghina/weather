@@ -4,16 +4,18 @@ import android.util.Log;
 
 import com.example.alin_.weatherforecast.model.DBModel;
 import com.example.alin_.weatherforecast.model.DBModelImpl;
-import com.example.alin_.weatherforecast.model.RestModelImpl;
 import com.example.alin_.weatherforecast.model.RestModel;
+import com.example.alin_.weatherforecast.model.RestModelImpl;
 import com.example.alin_.weatherforecast.model.pojo.WeatherDay;
 import com.example.alin_.weatherforecast.model.pojo.WeatherForecast;
-import com.example.alin_.weatherforecast.view.WeatherForecastView;
+import com.example.alin_.weatherforecast.view.activities.WeatherForecastView;
 
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
 
 /**
@@ -25,6 +27,8 @@ public class WeatherForecastPresenterImpl implements WeatherForecastPresenter {
     private WeatherForecastView view;
     private RestModel model = new RestModelImpl();
     private DBModel dbModel;
+    private String name;
+
     public WeatherForecastPresenterImpl(WeatherForecastView view) {
         this.view = view;
         dbModel = new DBModelImpl(view.getViewContext());
@@ -32,49 +36,39 @@ public class WeatherForecastPresenterImpl implements WeatherForecastPresenter {
 
     @Override
     public void getWeatherForecast() {
-        // get weather for today
-        Call<WeatherDay> callToday = model.getToday(view.getCityName());
-        callToday.enqueue(new Callback<WeatherDay>() {
+        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        //get weather for today
+        Single<WeatherDay> weatherDay = model.getToday(view.getCityName())
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        //get weather forecast
+        Single<WeatherForecast> weatherForecast = model.getForecast(view.getCityName())
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+        compositeDisposable.add(
+                weatherDay.subscribeWith(new DisposableSingleObserver<WeatherDay>() {
+                    @Override
+                    public void onSuccess(@NonNull WeatherDay weatherDay) {
+                        name = weatherDay.getCity();
+                        view.showToday(weatherDay);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                }));
+
+        compositeDisposable.add(weatherForecast.subscribeWith(new DisposableSingleObserver<WeatherForecast>() {
             @Override
-            public void onResponse(Call<WeatherDay> call, Response<WeatherDay> response) {
-                Log.e(TAG, "onResponse");
-                WeatherDay data = response.body();
-                Log.d(TAG, response.toString());
-
-                if (response.isSuccessful()) {
-                    view.showToday(data);
-                }
-
+            public void onSuccess(@NonNull WeatherForecast weatherForecast) {
+                view.showForecast(weatherForecast);
             }
 
             @Override
-            public void onFailure(Call<WeatherDay> call, Throwable t) {
-                Log.e(TAG, "onFailure");
-                Log.e(TAG, t.toString());
+            public void onError(@NonNull Throwable e) {
+                Log.e(TAG, e.getMessage());
             }
-        });
+        }));
 
-        // get weather forecast
-        Call<WeatherForecast> callForecast = model.getForecast(view.getCityName());
-        callForecast.enqueue(new Callback<WeatherForecast>() {
-            @Override
-            public void onResponse(Call<WeatherForecast> call, Response<WeatherForecast> response) {
-                Log.e(TAG, "onResponse");
-                WeatherForecast data = response.body();
-                Log.d(TAG, response.toString());
-
-                if (response.isSuccessful()) {
-                    view.showForecast(data);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<WeatherForecast> call, Throwable t) {
-                Log.e(TAG, "onFailure");
-                Log.e(TAG, t.toString());
-            }
-        });
     }
 
     @Override
@@ -84,6 +78,6 @@ public class WeatherForecastPresenterImpl implements WeatherForecastPresenter {
 
     @Override
     public void insertCity() {
-        dbModel.insertCity(view.getCityName());
+        dbModel.insertCity(name);
     }
 }

@@ -3,7 +3,7 @@ package com.example.alin_.weatherforecast.model.data.api;
 import com.example.alin_.weatherforecast.model.pojo.WeatherDay;
 import com.example.alin_.weatherforecast.model.pojo.WeatherForecast;
 
-import retrofit2.Call;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
@@ -13,13 +13,13 @@ import retrofit2.http.Query;
 
 public interface ApiInterface {
     @GET("weather")
-    Call<WeatherDay> getToday(
+    Single<WeatherDay> getToday(
             @Query("q") String name,
             @Query("appid") String appid
     );
 
     @GET("forecast")
-    Call<WeatherForecast> getForecast(
+    Single<WeatherForecast> getForecast(
             @Query("q") String name,
             @Query("appid") String appid
     );

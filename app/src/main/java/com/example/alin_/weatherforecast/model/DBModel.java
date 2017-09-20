@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface DBModel {
     List<City> getCities();
+
     void insertCity(String name);
+
     void deleteCity(Integer id);
 }

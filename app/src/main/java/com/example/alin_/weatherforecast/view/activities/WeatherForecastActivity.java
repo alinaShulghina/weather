@@ -1,4 +1,4 @@
-package com.example.alin_.weatherforecast.view;
+package com.example.alin_.weatherforecast.view.activities;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;

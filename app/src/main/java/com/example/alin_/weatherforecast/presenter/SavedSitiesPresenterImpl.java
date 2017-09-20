@@ -14,10 +14,12 @@ import java.util.List;
 public class SavedSitiesPresenterImpl implements SavedCitiesPresenter {
     private BaseView view;
     private DBModel model;
-    public SavedSitiesPresenterImpl(BaseView view){
+
+    public SavedSitiesPresenterImpl(BaseView view) {
         this.view = view;
         model = new DBModelImpl(view.getViewContext());
     }
+
     @Override
     public List<City> getCitiesFromDB() {
         return model.getCities();

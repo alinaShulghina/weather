@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.alin_.weatherforecast.model.DBModel;
 import com.example.alin_.weatherforecast.model.DBModelImpl;
-import com.example.alin_.weatherforecast.view.WeatherForecastActivity;
+import com.example.alin_.weatherforecast.view.activities.WeatherForecastActivity;
 import com.example.alin_.weatherforecast.view.adapters.IRecyclerViewAdapter;
 import com.example.alin_.weatherforecast.view.adapters.RecyclerViewAdapter;
 
@@ -18,7 +18,8 @@ public class RecyclerViewPresenterImpl implements RecyclerViewPresenter {
     private IRecyclerViewAdapter adapter;
     private DBModel model;
     private Context context;
-    public RecyclerViewPresenterImpl(RecyclerViewAdapter adapter){
+
+    public RecyclerViewPresenterImpl(RecyclerViewAdapter adapter) {
         this.adapter = adapter;
         context = adapter.getContext();
         model = new DBModelImpl(context);

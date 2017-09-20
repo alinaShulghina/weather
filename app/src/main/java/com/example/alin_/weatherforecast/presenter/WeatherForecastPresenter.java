@@ -6,5 +6,6 @@ package com.example.alin_.weatherforecast.presenter;
 
 public interface WeatherForecastPresenter extends BasePresenter {
     void getWeatherForecast();
+
     void insertCity();
 }

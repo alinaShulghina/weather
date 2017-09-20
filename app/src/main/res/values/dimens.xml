@@ -10,4 +10,5 @@
     <dimen name="image_view_height">100dp</dimen>
     <dimen name="weather_forecast_margin_top">24dp</dimen>
     <dimen name="weather_forecast_margin_left">20dp</dimen>
+    <dimen name="recycler_row_padding">16dp</dimen>
 </resources>

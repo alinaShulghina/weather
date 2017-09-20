@@ -1,4 +1,4 @@
-package com.example.alin_.weatherforecast.view;
+package com.example.alin_.weatherforecast.view.fragments;
 
 
 import android.content.Context;
@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 
 
 import com.example.alin_.weatherforecast.R;
+import com.example.alin_.weatherforecast.view.BaseView;
+import com.example.alin_.weatherforecast.view.activities.WeatherForecastActivity;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
@@ -80,7 +82,8 @@ public class SearchFragment extends Fragment implements BaseView {
     public Context getViewContext() {
         return this.getContext();
     }
-    public static SearchFragment newInstance(){
+
+    public static SearchFragment newInstance() {
         return new SearchFragment();
     }
 

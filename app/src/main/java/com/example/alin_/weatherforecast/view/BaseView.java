@@ -9,5 +9,6 @@ import android.content.Context;
 
 public interface BaseView {
     void showError();
+
     Context getViewContext();
 }

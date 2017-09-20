@@ -3,16 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:focusable="true"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:padding="@dimen/recycler_row_padding"
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical">
     <TextView
         android:id="@+id/city_name"
-        android:textSize="30dp"
+        android:textSize="@dimen/forecast_activity_text_size"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

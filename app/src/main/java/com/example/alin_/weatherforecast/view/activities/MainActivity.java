@@ -1,17 +1,14 @@
-package com.example.alin_.weatherforecast.view;
+package com.example.alin_.weatherforecast.view.activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
 
 import com.example.alin_.weatherforecast.R;
-import com.example.alin_.weatherforecast.view.SavedCitiesFragment;
-import com.example.alin_.weatherforecast.view.SearchFragment;
 import com.example.alin_.weatherforecast.view.adapters.ViewPagerAdapter;
+import com.example.alin_.weatherforecast.view.fragments.SavedCitiesFragment;
+import com.example.alin_.weatherforecast.view.fragments.SearchFragment;
 
 
 public class MainActivity extends AppCompatActivity {
